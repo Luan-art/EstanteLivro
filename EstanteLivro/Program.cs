@@ -3,7 +3,7 @@
 //Livro l = new("Senhor dos Anéis", "J. R. R. Tolkien", DateOnly.Parse("03/11/2001"), "Saraiva", 1, "1234567", 500);
 
 Livro[] estante = new Livro[10];
-int indice = 0, op = 0;
+int indice = 0, op = 0, qtdAutor = 0;
 
 int Menu()
 {
@@ -18,7 +18,8 @@ int Menu()
 
 Livro CadastrarLivro()
 {
-    string titulo, autor, editora, isbn;
+    string titulo, editora, isbn;
+    string[] autor = new string[3];
     int edicao, paginas;
     DateOnly lancamento;
 
@@ -27,7 +28,7 @@ Livro CadastrarLivro()
         Console.WriteLine("Informe o titulo do livro: ");
         titulo = Console.ReadLine();
         Console.WriteLine("Informe o autor do livro: ");
-        autor = Console.ReadLine();
+        autor = InformarAutores();
         Console.WriteLine("Informe a data de lançamento: ");
         lancamento = DateOnly.Parse(Console.ReadLine());
         Console.WriteLine("Informe a editora: ");
@@ -55,6 +56,30 @@ Livro CadastrarLivro()
     return new(titulo, autor, lancamento, editora, edicao, isbn, paginas);
 
 }
+
+String[] InformarAutores()
+{
+    int qtdAutores;
+
+    do
+    {
+        Console.WriteLine("Quantos autores fizeram o livro?");
+        qtdAutores = int.Parse(Console.ReadLine());
+    } while (qtdAutores > 3);
+
+    string[] autores = new string[qtdAutores] ;
+
+
+    for ( int i = 0; i < qtdAutores; i++)
+    {
+        Console.WriteLine("Digite o nome de um dos autores?");
+        autores[i] = Console.ReadLine();
+    }
+
+
+    return autores;
+}
+
 void AdicionarLivroNaEstante()
 {
     do
@@ -92,14 +117,14 @@ void AdicionarLivroNaEstante()
 void ImprimirEstante()
 {
     for (int i = 0; i < indice; i++)
-        estante[i].ImprimirLivro();
+        estante[i].ImprimirLivro(qtdAutor);
 }
 
 void BuscarLivro(int i)
 {
     if (i < indice)
     {
-        estante[i].ImprimirLivro();
+        estante[i].ImprimirLivro(qtdAutor);
     }
     else
     {

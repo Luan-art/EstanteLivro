@@ -9,14 +9,14 @@ namespace EstanteLivro
     internal class Livro
     {
         string Titulo;
-        string Autor;
+        string[] Autor;
         DateOnly Lancamento;
         string Editora;
         int Edicao;
         string ISBN;
         int Paginas;
 
-        public Livro(string titulo, string autor, DateOnly lancamento, string editora, int edicao, string iSBN, int paginas)
+        public Livro(string titulo, string[] autor, DateOnly lancamento, string editora, int edicao, string iSBN, int paginas)
         {
             Titulo = titulo;
             Autor = autor;
@@ -27,11 +27,19 @@ namespace EstanteLivro
             Paginas = paginas;
         }
 
-        public void ImprimirLivro()
+        public void ImprimirLivro(int qtdAutor)
         {
             Console.WriteLine("\n\n>>> INFORMAÇÕES DO LIVRO <<<");
             Console.WriteLine("Titulo: "+this.Titulo);
-            Console.WriteLine("Autor: "+this.Autor);
+            Console.WriteLine("Autores: ");
+            for(int i = 0; i < Autor.Length; i++)
+            {
+                if(Autor != null)
+                {
+                Console.WriteLine("Autor: " + this.Autor[i]);
+                }
+
+            }
             Console.WriteLine("Data de Lançamento: "+this.Lancamento);
             Console.WriteLine("Editora: "+this.Editora);
             Console.WriteLine("Ediçao: "+this.Edicao);
