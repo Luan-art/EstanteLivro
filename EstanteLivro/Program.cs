@@ -22,20 +22,35 @@ Livro CadastrarLivro()
     int edicao, paginas;
     DateOnly lancamento;
 
-    Console.WriteLine("Informe o titulo do livro: ");
-    titulo = Console.ReadLine();
-    Console.WriteLine("Informe o autor do livro: ");
-    autor = Console.ReadLine();
-    Console.WriteLine("Informe a data de lançamento: ");
-    lancamento = DateOnly.Parse(Console.ReadLine());
-    Console.WriteLine("Informe a editora: ");
-    editora = Console.ReadLine();
-    Console.WriteLine("Informe a edição: ");
-    edicao = int.Parse(Console.ReadLine());
-    Console.WriteLine("Informe o ISBN: ");
-    isbn = Console.ReadLine();
-    Console.WriteLine("Informe a quantidade de páginas: ");
-    paginas = int.Parse(Console.ReadLine());
+    do
+    {
+        Console.WriteLine("Informe o titulo do livro: ");
+        titulo = Console.ReadLine();
+        Console.WriteLine("Informe o autor do livro: ");
+        autor = Console.ReadLine();
+        Console.WriteLine("Informe a data de lançamento: ");
+        lancamento = DateOnly.Parse(Console.ReadLine());
+        Console.WriteLine("Informe a editora: ");
+        editora = Console.ReadLine();
+        Console.WriteLine("Informe a edição: ");
+        edicao = int.Parse(Console.ReadLine());
+        Console.WriteLine("Informe o ISBN: ");
+        isbn = Console.ReadLine();
+        Console.WriteLine("Informe a quantidade de páginas: ");
+        paginas = int.Parse(Console.ReadLine());
+
+        if (edicao <= 0 || paginas < 1)
+        {
+            Console.WriteLine("valores impróprios adcioandos");
+        }
+        else
+        {
+            Console.WriteLine("livro adicionado com sucesso");
+        }
+
+    } while (edicao <= 0 || paginas < 1);
+
+
 
     return new(titulo, autor, lancamento, editora, edicao, isbn, paginas);
 
@@ -44,11 +59,34 @@ void AdicionarLivroNaEstante()
 {
     do
     {
-        Livro l = CadastrarLivro();
-        estante[indice] = l;
-        indice++;
-        Console.WriteLine("Deseja cadastrar um novo livro?");
-        op = int.Parse(Console.ReadLine());
+        if (indice < 10)
+        {
+            Livro l = CadastrarLivro();
+            estante[indice] = l;
+            indice++;
+            Console.WriteLine("Deseja cadastrar um novo livro?");
+            Console.WriteLine("0 - caso não");
+            op = int.Parse(Console.ReadLine());
+
+            if (op != 0)
+            {
+                Console.WriteLine("Cadastrando outro livro.");
+
+            }
+            else
+            {
+
+                Console.WriteLine("Até mais.");
+
+            }
+        }
+        else
+        {
+            Console.WriteLine("Estante cheia.");
+
+        }
+
+
     } while (op != 0 && indice < 10);
 }
 void ImprimirEstante()
@@ -59,7 +97,14 @@ void ImprimirEstante()
 
 void BuscarLivro(int i)
 {
-    estante[i].ImprimirLivro();
+    if (i < indice)
+    {
+        estante[i].ImprimirLivro();
+    }
+    else
+    {
+        Console.WriteLine("Não existe livre nesse local");
+    }
 }
 
 do
@@ -86,8 +131,3 @@ do
     }
 } while (true);
 
-
-
-
-
-Console.ReadLine();
